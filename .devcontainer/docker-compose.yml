@@ -15,14 +15,18 @@ services:
       - MYSQL_PASSWORD
     volumes:
       - ../db/database:/var/lib/mysql
-      - ../db/init:/docker-entrypoint-initdb.d  
+      - ../db/init:/docker-entrypoint-initdb.d
   web:
     image: flask/web:1.0
     build: ./web
     container_name: 'flask_web'
+    environment:
+      - FLASK_DEBUG
     ports:
       - 5000:5000
     stdin_open: true
     tty: true
+    depends_on:
+      - db
     volumes:
       - ../web:/home/user1/dev

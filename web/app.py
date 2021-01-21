@@ -8,7 +8,7 @@ app = Flask(__name__)
 def index():
   conn = mysql.connector.connect(user='my', password='my', host='flask_db', database='my')
   cur = conn.cursor()
-  cur.execute("select * from book")
+  cur.execute("select * from book where id = 3")
   books = cur.fetchall()
   cur.close()
   conn.close()
@@ -18,4 +18,4 @@ def index():
 
 
 if __name__ == '__main__':
-  app.run(port=5000)
+  app.run(host='0.0.0.0', port=5000)
